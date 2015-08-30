@@ -1,0 +1,203 @@
+<html ng-app="EatloApp">
+<head>
+    <title>Eatlo | Food Ordering | Lunch delivery in Bangalore | 20 mins Delivery</title>
+    <link rel="icon" href="favicon.ico">
+    
+    <link rel="stylesheet" href="css/animate.css">
+    <link href="http://fonts.googleapis.com/css?family=Raleway:400,100,300,500" rel="stylesheet" type="text/css">
+    
+    <!-- Fonts -->
+    <link rel="stylesheet" href="font-awesome/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Yellowtail" rel="stylesheet" type="text/css">    
+    
+    <!-- Foundation styles -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet/less" type="text/css" href="css/done.less">
+    <style type="text/css" id="less:css-done"></style>
+    
+    <script>
+            less = {
+                env: "production"
+            };
+    </script>
+    
+    <script src="js/less-1.7.3.min.js" type="text/javascript"></script>
+    <script src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-animate.min.js"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery.backstretch.min.js"></script>
+    
+    
+</head>
+    
+    
+    <!--Body -->
+    
+<body class="f-topbar-fixed">
+        
+<div class="small-12 large-12 columns no-padding" onload="">
+    <div class="Header large-12" style="height: 51px; background-color: #e97770;">
+         <div class=" outlet selected large-2  no-padding  columns" style="border: none;background-color: #dbdbdb;margin-top: 8px;margin-left: 4px;">
+
+            <span class="outlet-name"> Indiranagar </span>
+
+        </div>   
+        <div class=" outlet selected large-2  no-padding  columns" style="border: none;height: 50px; padding-top: 16px;">
+
+            <span style="color: #dbdbdb;"> <a id="outlet-changer" href="http://eatloapp.com/#/outlets"> Change Outlet</a></span>
+        </div> 
+                
+        <div class="large-5  no-padding columns">
+                <img src="img/Eatlo_Logo_square.png" width="113px" style="margin-left: 60.5%;height: 47px;padding-top: 5px;">
+        </div>
+        <div class="large-3 no-padding columns">
+            <ul id="social-links-container" style="margin-top: 0px;margin-right: 1px;">
+                <li onclick="window.open('https://www.facebook.com/eatloapp')">
+                    <img src="img/facebook.png" alt="Facebook" height="50px" width="50px">
+                </li>
+                <li onclick="window.open('https://www.twitter.com/eatloapp')">
+                    <img src="img/twitter.png" alt="Twitter" height="50px" width="50px">
+                </li>
+                <li>
+                    <img onclick="window.open('http://www.eatloapp.com/app')" src="img/android.png" height="50px" width="50px" alt="Android">
+                </li>
+
+                <li>
+                    <img onclick="window.open('http://about.eatloapp.com/ios')" src="img/apple.png" alt="Apple" height="50px" width="50px">
+                </li>
+            </ul> 
+        </div>         
+    <!--</div>-->
+    </div>
+
+
+<div class="small-12 small-centered columns" ng-controller ="MenuController as menu">
+
+    <div id="category-hero">
+
+            <div class="large-12 columns no-padding">
+                <div id="category-description">
+                    <span id="category-description-name">Lunch and Snacks Menu</span>
+                    <ul class="attribute-container" style="margin-left: 0px !important;" ng-init="select(1)">
+                        <!-- ngRepeat: category in categories |orderBy: 'sr' -->
+                        <li ng-class ="{active: isActive(1)}" ng-click="select(1)">
+                            <label class="attribute-name" ng-click="vegfilter={}" >All</label>
+                        </li><!-- end ngRepeat: category in categories |orderBy: 'sr' -->
+                        <li ng-class ="{active: isActive(2)}" ng-click="select(2)">
+                            <label class="attribute-name" ng-click="vegfilter={type:true}">Veg</label>
+                        </li><!-- end ngRepeat: category in categories |orderBy: 'sr' -->
+                        <li ng-class ="{active: isActive(3)}" ng-click="select(3)" >
+                            <label class="attribute-name" ng-click="vegfilter={type:false}" >Non-Veg</label>
+                        </li>
+                    </ul>        
+                </div>
+                
+                <div style="position: absolute;top:30%;right: 13%;">
+                </div>
+                
+            </div>
+        </div>
+    
+    
+    <div class="medium-12 medium-centered large-9 columns no-padding large-uncentered"> 
+        
+        <ul class="small-block-grid-1 medium-block-grid-3 large-block-grid-3" id="product-container">
+         
+            <li class="product-animate" ng-repeat ="m in menu.products | filter:vegfilter">
+                <div class="product row" ng-click = "process(m)">
+                    <img style="position: absolute;margin: 5px;" src={{m.imagethumb}}>
+                    
+                    <div class="product-image" style="background-image: url({{m.image}})"></div>
+                   
+                    <div class="small-12 large-11 columns no-padding" style="min-height: 20px;">                  
+                        <div class="row">
+                            
+                                <div class="columns large-6">
+                                    <div class="product-name">{{m.name}}</div>
+                                </div>
+                                <div class="columns large-6">
+                                    <div class="product-last-row">
+                                        <div class="product-price">{{m.price | currency:"&#8377;"}}</div>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                        <div class="product-description">
+                           <span>{{m.descript}}</span>
+                            
+                        </div>        
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        <div class="show-for-large-up free-height"></div>
+    </div>
+    <!--Cart class-->
+    <div class="medium-6 medium-centered large-3 columns large-uncentered">
+        <div class="cart-container">
+        <div id="cart-container" ng-show="cart_items.length > 0">
+            <span id="cart-info"><i class="fa-shopping-cart"></i>{{cart_items.count}} items of {{cart_items.length}} products</span>
+            <hr>
+            <div id="cart-item-container">
+            <div class="cart-item row" ng-repeat="cart_item in cart_items track by $index">
+                    <div class="cart-item-description-container">
+                        <span class="product-name">{{cart_item.name}}</span>
+                        <span class="product-description" ng-repeat="customization in cart_item.customization">{{customization.name}}</span>
+                    </div>
+                    <div class="columns">
+                        <div class="small-6 columns cart-item-info">
+                            <span>{{cart_item.quantity}}</span>
+                        </div>
+                        <div class="small-6 columns cart-item-info">
+                            <span>Rs. {{cart_item.total_price}}</span>
+                        </div>
+                    </div>
+                    <div class="cart-item-action-container columns">
+                        
+                        <div class="small-3 columns">
+                            <button class="change-quantity-button minus" ng-click="change_quantity(false, cart_item)"></button>
+                        </div>
+                        <div class="small-4 columns">
+                            <button class="change-quantity-button plus" ng-click="change_quantity(true, cart_item)"></button>
+                        </div>
+                        <div class="small-4 columns">
+                            <button class="change-quantity-button delete" ng-click="removeItem($index)"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <span id="cart-total">Total: &#8377 <span style="font-size: 27px;"><b>{{cart_total|number:2}}</b></span></span>
+        </div>   
+                <button ng-show="cart_items.length > 0" class="proceed-button" id="proceed-cart">Proceed<i class="fa-chevron-circle-right"></i></button>
+                <div class="show-for-medium-down free-height"></div>
+        </div> 
+        </div>
+</div>
+    
+
+   
+</div>
+        
+<div class="fixed">
+    <nav class="top-bar" data-topbar="">
+        <section class="top-bar-section">
+                <ul class="left" style="margin-left: 25%;">
+                    <li ><a href="#/outlets">Choose Location</a></li>
+                    <li><a href="#/menu">Choose Dishes</a></li>
+                    <li><a href="#/checkout">Place Order</a></li>
+                    <li><a href="#/orderhistory">Order History</a></li>
+                    <li><a href="#/contactus">Contact Us</a></li>
+                    <li><a href="http://about.eatloapp.com" target="_blank">About Us</a></li>            
+                </ul>
+
+
+
+            </section></nav>
+</div>
+        
+    </body>
+</html>
